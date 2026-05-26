@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaFrame | Modern Responsive Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="loader-container" id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span>Nova<span>Frame</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="#gallery" class="active">Gallery</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 class="animated-title">Curated Visual Stories</h1>
+        <p class="subtitle">Explore high-definition moments captured through the lens of creativity.</p>
+    </section>
+
+    <main class="gallery-container" id="gallery">
+        
+        <div class="filter-wrapper">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="tech">Technology</button>
+                <button class="filter-btn" data-filter="animals">Animals</button>
+                <button class="filter-btn" data-filter="cars">Cars</button>
+                <button class="filter-btn" data-filter="travel">Travel</button>
+            </div>
+        </div>
+
+        <div class="image-grid" id="image-grid">
+
+            <!-- Nature -->
+            <div class="gallery-item" data-category="nature">
+                <img src="images/nature1.jpg" alt="Majestic Mountain Range" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">blossoms</h3>
+                    <p class="item-category">Nature</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="nature">
+                <img src="images/nature2.jpg" alt="Serene beach" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Beautiful beach</h3>
+                    <p class="item-category">Nature</p>
+                </div>
+            </div>
+
+            <!-- Technology -->
+            <div class="gallery-item" data-category="tech">
+                <img src="images/tech1.jpg" alt="Cyberpunk Microchip Circuit" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Quantum Core</h3>
+                    <p class="item-category">Technology</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="tech">
+                <img src="images/tech2.jpg" alt="Abstract Matrix Cybersecurity" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Cyber Network</h3>
+                    <p class="item-category">Technology</p>
+                </div>
+            </div>
+
+            <!-- Animals -->
+            <div class="gallery-item" data-category="animals">
+                <img src="images/animal1.jpg" alt="Proud Roaring Lion" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">A cute rat</h3>
+                    <p class="item-category">Animals</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="animals">
+                <img src="images/animal2.jpg" alt="Cute Cat wearing Sunglasses" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Cute animal</h3>
+                    <p class="item-category">Animals</p>
+                </div>
+            </div>
+
+            <!-- Cars -->
+            <div class="gallery-item" data-category="cars">
+                <img src="images/car1.jpg" alt="Sleek Porsche Sports Car" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Porsche 911</h3>
+                    <p class="item-category">Cars</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="cars">
+                <img src="images/car2.jpg" alt="Modern Electric Supercar" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">E-Supercar</h3>
+                    <p class="item-category">Cars</p>
+                </div>
+            </div>
+
+            <!-- Travel -->
+            <div class="gallery-item" data-category="travel">
+                <img src="images/travel1.jpg" alt="Beautiful Tropical Beach Resort" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Sunset view</h3>
+                    <p class="item-category">Travel</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="travel">
+                <img src="images/travel2.jpg" alt="Eiffel Tower Paris" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Parisian Nights</h3>
+                    <p class="item-category">Travel</p>
+                </div>
+            </div>
+
+            <!-- Extra Nature -->
+            <div class="gallery-item" data-category="nature">
+                <img src="images/nature3.jpg" alt="Mystic Forest Pathways" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Water falls</h3>
+                    <p class="item-category">Nature</p>
+                </div>
+            </div>
+
+            <!-- Extra Travel -->
+            <div class="gallery-item" data-category="travel">
+                <img src="images/travel3.jpg" alt="Traditional Kyoto Torii Gates" loading="lazy">
+                <div class="item-overlay">
+                    <h3 class="item-title">Kyoto Gate</h3>
+                    <p class="item-category">Travel</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <section class="info-section" id="about">
+        <div class="section-container">
+            <h2 class="section-title">About NovaFrame</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Welcome to ImagiX, a cutting-edge digital playground dedicated to high-fidelity photography and modern web experiences. This platform showcases the intersection of clean architecture, seamless responsiveness, and immersive user interfaces.</p>
+                    <p>Built exclusively with semantic HTML5, modern CSS Grid/Flexbox layouts, and optimized vanilla JavaScript, this project represents a commitment to high-performance web standards without reliance on heavy external frameworks.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <h3>100%</h3>
+                        <p>Vanilla JS</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>6+</h3>
+                        <p>Categories</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Fluid</h3>
+                        <p>Responsive</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" id="contact">
+        <div class="section-container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Have a question or looking to collaborate on a visual project? Drop a message below.</p>
+            
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully! (Demo Only)');">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message Here..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    Send Message <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox">
+        <button class="close-btn" aria-label="Close Lightbox">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button class="nav-btn prev-btn" aria-label="Previous Image">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        
+        <div class="lightbox-content">
+            <img src="" alt="Enlarged view" id="lightbox-img">
+
+            <div class="lightbox-info">
+                <h3 id="lightbox-title">Image Title</h3>
+                <p id="lightbox-category">Category</p>
+            </div>
+
+            <div class="image-counter" id="image-counter">
+                1 / 12
+            </div>
+        </div>
+
+        <button class="nav-btn next-btn" aria-label="Next Image">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ImagiX Portfolio. Designed for Internship Project Submission.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

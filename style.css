@@ -1,0 +1,605 @@
+/* ==========================================================================
+   1. VARIABLES & BASE STYLES
+   ========================================================================== */
+:root {
+    --bg-dark: #0f0f12;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --font-sans: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. INITIAL LOADER SCREEN
+   ========================================================================== */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--glass-border);
+    border-radius: 50%;
+    border-top-color: #6366f1;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   3. NAVIGATION HEADER
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 8%;
+    background: rgba(15, 15, 18, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo i {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo span span {
+    color: #a855f7;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--text-main);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    transition: var(--transition-smooth);
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   4. HERO / TITLE SECTION (ANIMATED)
+   ========================================================================== */
+.hero {
+    text-align: center;
+    padding: 5rem 1rem 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards 0.4s;
+}
+
+.animated-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #ffffff, #9ca3af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   5. FILTER NAVIGATION
+   ========================================================================== */
+.filter-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 0.4rem;
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.filter-btn:hover {
+    color: var(--text-main);
+}
+
+.filter-btn.active {
+    background: var(--accent-gradient);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE IMAGE GRID & ITEMS
+   ========================================================================== */
+.gallery-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4% 6rem;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hover Effects */
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* Card Info Hover Overlay */
+.item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 15, 18, 0.9) 0%, rgba(15, 15, 18, 0.2) 70%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover .item-overlay {
+    opacity: 1;
+}
+
+.item-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    transform: translateY(10px);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.item-category {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: translateY(10px);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.05s;
+}
+
+.gallery-item:hover .item-title,
+.gallery-item:hover .item-category {
+    transform: translateY(0);
+}
+
+/* JavaScript Filter Classes */
+.gallery-item.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   7. LIGHTBOX / FULLSCREEN MODAL
+   ========================================================================== */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(8, 8, 10, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    max-width: 85vw;
+    max-height: 80vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+}
+
+/* Lightbox Info Tray */
+.lightbox-info {
+    text-align: center;
+    margin-top: 1.2rem;
+}
+
+#lightbox-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+#lightbox-category {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.image-counter {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.8rem;
+}
+
+/* Controls / Buttons Styles */
+.lightbox button {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    z-index: 1010;
+}
+
+.lightbox button:hover {
+    background: var(--accent-gradient);
+    border-color: transparent;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+.close-btn {
+    top: 2rem;
+    right: 2rem;
+}
+
+.prev-btn {
+    left: 2rem;
+}
+
+.next-btn {
+    right: 2rem;
+}
+
+/* ==========================================================================
+   8. FOOTER SECTION
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    background: rgba(10, 10, 12, 0.5);
+}
+
+/* ==========================================================================
+   9. ABOUT & CONTACT CONTENT SECTIONS
+   ========================================================================== */
+.info-section {
+    padding: 6rem 4% 4rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+.section-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(to right, #ffffff, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    margin-top: -1rem;
+}
+
+/* About Grid Layout */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.about-text p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 1.5rem 0.5rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.stat-card:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    transform: translateY(-5px);
+}
+
+.stat-card h3 {
+    font-size: 1.5rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* Contact Form Layout */
+.contact-form {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--glass-border);
+    padding: 2.5rem;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.form-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+.submit-btn {
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 auto;
+    transition: var(--transition-smooth);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* ==========================================================================
+   10. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .navbar { padding: 1.2rem 5%; }
+    .animated-title { font-size: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+    .navbar { padding: 1rem 4%; }
+    .nav-links { display: none; } 
+    
+    .animated-title { font-size: 2rem; }
+    .image-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+    
+    .lightbox button {
+        width: 46px;
+        height: 46px;
+        font-size: 1rem;
+    }
+    .prev-btn { left: 0.5rem; }
+    .next-btn { right: 0.5rem; }
+    .close-btn { top: 1rem; right: 1rem; }
+    .lightbox-content { max-width: 92vw; }
+
+    /* About & Contact Adaptive Fallbacks */
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .form-group {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .contact-form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .animated-title { font-size: 1.75rem; }
+    .subtitle { font-size: 0.95rem; }
+    .filter-buttons { padding: 0.3rem; }
+    .filter-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    .image-grid { grid-template-columns: 1fr; }
+}
