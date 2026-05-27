@@ -82,6 +82,9 @@ This project helped in learning:
 - Image Filtering
 - Frontend Project Structuring
 
+##Live link 
+https://madhuri1313.github.io/CodeAlpha_Image_Gallery/
+
 ## Internship Task
 
 CodeAlpha Frontend Development Internship
