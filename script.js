@@ -65,8 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==========================================
-       3. LIGHTBOX SYSTEM OPERATIONS
+       3. LIGHTBOX NAVIGATION SYSTEM (NEXT, PREV, VIEW)
        ========================================== */
+    // Helper function to update the content inside the lightbox modal
     const updateLightbox = () => {
         if (activeItems.length === 0) return;
         
@@ -75,16 +76,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const titleTarget = currentItem.querySelector(".item-title");
         const categoryTarget = currentItem.querySelector(".item-category");
 
-        // Set info inside modal
+        // Inject data into modal elements
         lightboxImg.src = imgTarget.src;
         lightboxImg.alt = imgTarget.alt;
         lightboxTitle.textContent = titleTarget.textContent;
         lightboxCategory.textContent = categoryTarget.textContent;
         
-        // Update Counter display string
+        // Update Counter display string (e.g., "3 / 12")
         imageCounter.textContent = `${currentIndex + 1} / ${activeItems.length}`;
     };
 
+    // Open Lightbox View
     const openLightbox = (index) => {
         currentIndex = index;
         updateLightbox();
@@ -92,27 +94,30 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "hidden"; // Prevent background body scroll
     };
 
+    // Close Lightbox View
     const closeLightbox = () => {
         lightbox.classList.remove("active");
         document.body.style.overflow = ""; // Re-enable background scrolling
     };
 
+    // Navigate to the Next Image
     const nextImage = () => {
         if (activeItems.length === 0) return;
-        currentIndex = (currentIndex + 1) % activeItems.length; // Loop around to index 0 safely
+        currentIndex = (currentIndex + 1) % activeItems.length; // Loop back to 0 at the end
         updateLightbox();
     };
 
+    // Navigate to the Previous Image
     const prevImage = () => {
         if (activeItems.length === 0) return;
-        currentIndex = (currentIndex - 1 + activeItems.length) % activeItems.length; // Anti-negative loop safety
+        currentIndex = (currentIndex - 1 + activeItems.length) % activeItems.length; // Loop to end if below 0
         updateLightbox();
     };
 
-    // Bind Click Events dynamically to current contextual active items
+    // Attach click triggers to all items for opening the view
     galleryItems.forEach((item) => {
         item.addEventListener("click", () => {
-            // Locate correct item index within the currently filtered array pool
+            // Find item position relative only to currently visible filtered elements
             const filterIndex = activeItems.indexOf(item);
             if (filterIndex !== -1) {
                 openLightbox(filterIndex);
@@ -120,12 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Control Event Listeners
+    // Control Button Event Listeners
     if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
     if (nextBtn) nextBtn.addEventListener("click", nextImage);
     if (prevBtn) prevBtn.addEventListener("click", prevImage);
 
-    // Click outside image space to shut down Lightbox Overlay
+    // Click outside image space (on the dark background overlay) to close
     lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) {
             closeLightbox();
@@ -150,13 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==========================================
-       5. NEW: DYNAMIC NAVBAR SCROLL TRACKER
+       5. DYNAMIC NAVBAR SCROLL TRACKER
        ========================================== */
     const sections = document.querySelectorAll("main.gallery-container, section.info-section");
     
     const observerOptions = {
         root: null,
-        rootMargin: "-20% 0px -60% 0px", // Triggers when element occupies primary viewport zone
+        rootMargin: "-20% 0px -60% 0px", // Triggers when section enters active viewport area
         threshold: 0
     };
 
